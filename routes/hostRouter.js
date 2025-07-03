@@ -5,14 +5,21 @@ const rootDir=require("../utils/pathUtil");
 
 //add-home
 hostRouter.get("/add-home",(req,res,next) =>{
-res.sendFile(path.join(rootDir,"views","addHome.html"));
+res.render("addHome");
 });
+
+const registeredHomes = [];
 
 //home-added
 hostRouter.post("/add-home",(req,res,next) =>{
-res.sendFile(path.join(rootDir,"views","homeAdded.html"));
+  
+    registeredHomes.push({houseName:req.body.houseName});
+  
+res.render("homeAdded");
 });
 
 
 
-module.exports=hostRouter;
+
+exports.registeredHomes = registeredHomes;
+exports.hostRouter = hostRouter;
