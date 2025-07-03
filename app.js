@@ -1,29 +1,34 @@
 const express = require("express");
-const path=require('path');
-const userRouter=require("./routes/userRouter");
-const {hostRouter} = require("./routes/hostRouter");
-const rootDir=require("./utils/pathUtil");
+const path = require('path');
+const userRouter = require("./routes/userRouter");
+const { hostRouter, registeredHomes } = require("./routes/hostRouter");
+const rootDir = require("./utils/pathUtil");
+
 const app = express();
-app.set("view engine","ejs");
-app.set("views","views");
+app.set("view engine", "ejs");
+app.set("views", "views");
 
-//css
-app.use(express.static(path.join(rootDir,"public")));
+// serve static files (like CSS/images from public/)
+app.use(express.static(path.join(rootDir, "public")));
 
-//request body
-app.use(express.urlencoded()); 
+// to parse form data
+app.use(express.urlencoded({ extended: false }));
 
-//user-side
+// user-side routes
 app.use(userRouter);
 
-//host-side 
-app.use("/host",hostRouter)
+// host-side routes
+app.use("/host", hostRouter);
 
-//404 error
-app.use((req,res,next)=>{
-  res.status(404).render("404");
-})
+app.get("/", (req, res) => {
+  res.render("home", { registeredHomes });
+});
+
+app.use((req, res, next) => {
+  res.status(404).render("404",{currentPage: '404'});
+});
+
 const port = 3001;
 app.listen(port, () => {
-  console.log(`server listening on http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });

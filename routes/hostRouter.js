@@ -1,25 +1,40 @@
-const path=require('path');
-const express = require("express");
+const path = require('path');
+const express = require('express');
 const hostRouter = express.Router();
-const rootDir=require("../utils/pathUtil");
-
-//add-home
-hostRouter.get("/add-home",(req,res,next) =>{
-res.render("addHome");
-});
 
 const registeredHomes = [];
 
-//home-added
-hostRouter.post("/add-home",(req,res,next) =>{
-  
-    registeredHomes.push({houseName:req.body.houseName});
-  
-res.render("homeAdded");
+hostRouter.get('/add-home', (req, res) => {
+  res.render('addHome', { currentPage: 'AddHome' });
 });
 
+hostRouter.post('/add-home', (req, res) => {
+  console.log(req.body);
 
+  const home = {
+    houseName: req.body.houseName?.trim() || '',
+    price: req.body.price?.trim() || '',
+    location: req.body.location?.trim() || '',
+    rating: req.body.rating?.trim() || '',
+    photoUrl: req.body.photoUrl?.trim() || ''
+  };
 
+ 
+  if (
+    !home.photoUrl.match(/^https?:\/\//) &&
+    !home.photoUrl.startsWith('/')
+  ) {
+    home.photoUrl = '';
+  }
 
-exports.registeredHomes = registeredHomes;
-exports.hostRouter = hostRouter;
+  if (home.houseName && home.price && home.location) {
+    registeredHomes.push(home);
+  }
+
+  res.redirect('/');
+});
+
+module.exports = {
+  hostRouter,
+  registeredHomes,
+};
