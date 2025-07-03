@@ -2,11 +2,11 @@ const path = require('path');
 const express = require("express");
 const userRouter = express.Router();
 const rootDir=require("../utils/pathUtil");
-const { registeredHomes } = require('./hostRouter');
+const homesController = require("../controllers/home");
 
 //home-page-user
-userRouter.get("/",(req,res,next) =>{
-res.render('home', { registeredHomes: registeredHomes , currentPage: 'Home' });
+userRouter.get("/", (req, res) => {
+  res.render('home', { registeredHomes: homesController.getRegisteredHomes, currentPage: 'Home' });
 });
 
 module.exports=userRouter;

@@ -1,40 +1,12 @@
-const path = require('path');
 const express = require('express');
 const hostRouter = express.Router();
+const homesController=require("../controllers/home");
 
-const registeredHomes = [];
 
-hostRouter.get('/add-home', (req, res) => {
-  res.render('addHome', { currentPage: 'AddHome' });
-});
+hostRouter.get('/add-home',homesController.getAddHome);
 
-hostRouter.post('/add-home', (req, res) => {
-  console.log(req.body);
-
-  const home = {
-    houseName: req.body.houseName?.trim() || '',
-    price: req.body.price?.trim() || '',
-    location: req.body.location?.trim() || '',
-    rating: req.body.rating?.trim() || '',
-    photoUrl: req.body.photoUrl?.trim() || ''
-  };
-
- 
-  if (
-    !home.photoUrl.match(/^https?:\/\//) &&
-    !home.photoUrl.startsWith('/')
-  ) {
-    home.photoUrl = '';
-  }
-
-  if (home.houseName && home.price && home.location) {
-    registeredHomes.push(home);
-  }
-
-  res.redirect('/');
-});
+hostRouter.post('/add-home', homesController.postAddHome);
 
 module.exports = {
-  hostRouter,
-  registeredHomes,
+  hostRouter
 };

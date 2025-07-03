@@ -3,7 +3,7 @@ const path = require('path');
 const userRouter = require("./routes/userRouter");
 const { hostRouter, registeredHomes } = require("./routes/hostRouter");
 const rootDir = require("./utils/pathUtil");
-
+const errorsController=require("./controllers/errors"); 
 const app = express();
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -24,9 +24,7 @@ app.get("/", (req, res) => {
   res.render("home", { registeredHomes });
 });
 
-app.use((req, res, next) => {
-  res.status(404).render("404",{currentPage: '404'});
-});
+app.use(errorsController.pageNotFound);
 
 const port = 3001;
 app.listen(port, () => {
