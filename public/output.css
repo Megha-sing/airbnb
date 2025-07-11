@@ -192,6 +192,37 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
+  .grid {
+    display: grid;
+  }
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .sm\:grid-cols-2 {
+    /* For small screens and up */
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .md\:grid-cols-3 {
+    /* For medium screens and up */
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .gap-10 {
+    gap: 2.5rem;
+  }
+  .w-full {
+    width: 100%;
+  }
+  .max-w-6xl {
+    max-width: 72rem;
+  }
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 body {
   font-family: 'Arial', sans-serif;
@@ -259,4 +290,69 @@ h2 {
       --tw-outline-style: solid;
     }
   }
+}
+button, .btn-red {
+  background-color: #dc2626;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+  margin-top: 1rem;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+button:hover, .btn-red:hover {
+  background-color: #b91c1c;
+}
+.btn-yellow {
+  background-color: #facc15;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+  margin-top: 1rem;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+.btn-yellow:hover {
+  background-color: #eab308;
+}
+.btn-navbar {
+  background-color: #ff5a5f;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+  margin-top: 1rem;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+.btn-navbar:hover {
+  background-color: #e54e52;
+}
+.card-shadow {
+  box-shadow: 0 0 0 4px #ff5a5f, 0 8px 32px 0 rgba(0,0,0,0.10), 0 2px 8px 0 rgba(0,0,0,0.08);
+  border: 2.5px solid #ff5a5f !important; /* Same as navbar */
+  border-radius: 1.5rem;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.card-shadow:hover {
+  box-shadow: 0 0 0 6px #e54e52, 0 12px 40px 0 rgba(0,0,0,0.13), 0 4px 16px 0 rgba(0,0,0,0.13);
+  border-color: #e54e52 !important; /* Slightly darker on hover, like navbar hover */
+}
+.simple-card {
+  border: 2px solid #ff5a5f !important;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  background: #fff;
 }

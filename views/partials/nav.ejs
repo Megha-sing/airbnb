@@ -3,15 +3,40 @@
       <ul style="display: flex; gap: 20px; margin: 0; padding: 0; list-style: none;">
         <% let homeActive = currentPage === 'Home' ? 'background-color: #e54e52;' : ''; %>
         <% let addHomeActive = currentPage === 'AddHome' ? 'background-color: #e54e52;' : ''; %>
+        <% let bookingsActive = currentPage === 'bookings' ? 'background-color: #e54e52;' : ''; %>
+        <% let hostHomeActive = currentPage === 'host-home' ? 'background-color: #e54e52;' : ''; %>
+        <% let favouritesActive = currentPage === 'favourite-list' ? 'background-color: #e54e52;' : ''; %>
+        <% let homesActive = currentPage === 'homes' ? 'background-color: #e54e52;' : ''; %>
         <li>
           <a href="/" 
-            style="color: white; font-weight: bold; text-decoration: none; border-radius: 4px; padding: 0.5rem 1rem; transition: background-color 0.3s;<%= homeActive %>"
-          >Home</a>
+            style="color: white; font-weight: bold; text-decoration: none; border-radius: 4px; padding: 0.5rem 1rem; transition: background-color 0.3s; <%= homeActive %>"
+          >Airbnb</a>
+        </li>
+        
+        <li>
+          <a href="/bookings" 
+            style="color: white; font-weight: bold; text-decoration: none; border-radius: 4px; padding: 0.5rem 1rem; transition: background-color 0.3s; <%= bookingsActive %>"
+          >Bookings</a>
+        </li>
+        <li>
+          <a href="/favourite-list" 
+            style="color: white; font-weight: bold; text-decoration: none; border-radius: 4px; padding: 0.5rem 1rem; transition: background-color 0.3s; <%= favouritesActive %>"
+          >Favourites</a>
+        </li>
+        <li>
+          <a href="/homes" 
+            style="color: white; font-weight: bold; text-decoration: none; border-radius: 4px; padding: 0.5rem 1rem; transition: background-color 0.3s; <%= homesActive %>"
+          >Homes-List</a>
         </li>
         <li>
           <a href="/host/add-home" 
-            style="color: white; font-weight: bold; text-decoration: none; border-radius: 4px; padding: 0.5rem 1rem; transition: background-color 0.3s;<%= addHomeActive %>"
+            style="color: white; font-weight: bold; text-decoration: none; border-radius: 4px; padding: 0.5rem 1rem; transition: background-color 0.3s; <%= addHomeActive %>"
           >Add Home</a>
+        </li>
+          <li>
+          <a href="/host/host-home-list" 
+            style="color: white; font-weight: bold; text-decoration: none; border-radius: 4px; padding: 0.5rem 1rem; transition: background-color 0.3s; <%= hostHomeActive %>"
+          >Host Home</a>
         </li>
       </ul>
     </nav>

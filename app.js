@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require('path');
 const userRouter = require("./routes/userRouter");
-const { hostRouter, registeredHomes } = require("./routes/hostRouter");
+const hostRouter = require("./routes/hostRouter");
 const rootDir = require("./utils/pathUtil");
 const errorsController=require("./controllers/errors"); 
 const app = express();
@@ -20,9 +20,7 @@ app.use(userRouter);
 // host-side routes
 app.use("/host", hostRouter);
 
-app.get("/", (req, res) => {
-  res.render("home", { registeredHomes });
-});
+
 
 app.use(errorsController.pageNotFound);
 
