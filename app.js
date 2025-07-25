@@ -1,30 +1,32 @@
-const express = require("express");
+// Core Module
 const path = require('path');
-const userRouter = require("./routes/userRouter");
-const hostRouter = require("./routes/hostRouter");
+
+// External Module
+const express = require('express');
+
+//Local Module
+const storeRouter = require("./routes/storeRouter")
+const hostRouter = require("./routes/hostRouter")
 const rootDir = require("./utils/pathUtil");
-const errorsController=require("./controllers/errors"); 
+const errorsController = require("./controllers/errors");
+const {mongoConnect} = require('./utils/databaseUtil');
+
 const app = express();
-app.set("view engine", "ejs");
-app.set("views", "views");
 
-// serve static files (like CSS/images from public/)
-app.use(express.static(path.join(rootDir, "public")));
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
-// to parse form data
-app.use(express.urlencoded({ extended: false }));
-
-// user-side routes
-app.use(userRouter);
-
-// host-side routes
+app.use(express.urlencoded());
+app.use(storeRouter);
 app.use("/host", hostRouter);
 
-
+app.use(express.static(path.join(rootDir, 'public')))
 
 app.use(errorsController.pageNotFound);
 
-const port = 3001;
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+const PORT = 3000;
+mongoConnect(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on address http://localhost:${PORT}`);
+  });
+})

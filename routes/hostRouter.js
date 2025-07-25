@@ -1,18 +1,15 @@
-const express = require('express');
+// External Module
+const express = require("express");
 const hostRouter = express.Router();
-const homesController=require("../controllers/host");
 
+// Local Module
+const hostController = require("../controllers/hostController");
 
-hostRouter.get('/add-home',homesController.getAddHome);
-
-hostRouter.post('/add-home', homesController.postAddHome);
-
-hostRouter.get('/host-home-list', homesController.getHostHomes);
-
-hostRouter.get('/editHome/:homeId', homesController.getEditHome);
-
-hostRouter.post('/editHome/:homeId', homesController.postEditHome);
-
-hostRouter.post('/deleteHome/:homeId', homesController.postDeleteHome);
+hostRouter.get("/add-home", hostController.getAddHome);
+hostRouter.post("/add-home", hostController.postAddHome);
+hostRouter.get("/host-home-list", hostController.getHostHomes);
+hostRouter.get("/edit-home/:homeId", hostController.getEditHome);
+hostRouter.post("/edit-home", hostController.postEditHome);
+hostRouter.post("/delete-home/:homeId", hostController.postDeleteHome);
 
 module.exports = hostRouter;
