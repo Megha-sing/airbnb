@@ -1,43 +1,66 @@
 <%- include('../partials/head') %>
-<body>
-<%- include('../partials/nav') %>
-  <main class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 py-10" style="width:90vw;max-width:90vw;">
-    <h1 class="text-red-600 text-4xl font-extrabold text-center mb-4 drop-shadow-sm">Welcome to Airbnb</h1>
-    <p class="text-gray-700 text-xl text-center mb-10">Favourites</p>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 w-full max-w-6xl px-4">
-      <% favouriteHomes.forEach(home => { %>
-        <% if (home) { %>
-          <div class="bg-white rounded-2xl ring-1 ring-gray-200 shadow-md hover:shadow-xl transform hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-in-out min-h-[260px] w-full flex flex-col items-center p-6">
-            <% if (home.photoUrl) { %>
-              <img src="<%= home.photoUrl %>" alt="Home photo" class="w-44 h-32 object-cover rounded-xl mb-4 shadow-sm" onerror="this.style.display='none'" />
-            <% } %>
-            <span class="text-2xl font-semibold text-red-700 mb-3 text-center"><%= home.houseName %></span>
-            <ul class="w-full flex flex-col gap-2">
-              <% if (home.price) { %>
-                <li class="flex items-center bg-gray-100 rounded-xl px-4 py-2 text-base text-gray-800 shadow-sm">
-                  <span class="font-semibold w-28">Price:</span> ₹<%= home.price %> / night
-                </li>
+  <body class="bg-slate-900 text-white">
+    <%- include('../partials/nav') %>
+
+      <main
+        class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-black py-10 w-[90vw] max-w-[90vw]">
+        <h1 class="text-4xl font-extrabold text-red-500 text-center mb-4 drop-shadow-sm">Welcome to Airbnb</h1>
+        <p class="text-xl text-slate-300 text-center mb-10">Favourites</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 w-full max-w-6xl px-4">
+          <% favouriteHomes.forEach(home=> { %>
+            <% if (home) { %>
+              <div
+                class="bg-slate-800 rounded-2xl border border-slate-700 shadow-md hover:shadow-xl transform hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-in-out min-h-[260px] w-full flex flex-col items-center p-6">
+
+                <% if (home.photoUrl) { %>
+                  <img src="<%= home.photoUrl %>" alt="Home photo"
+                    class="w-44 h-32 object-cover rounded-xl mb-4 shadow-sm" onerror="this.style.display='none'" />
+                  <% } %>
+
+                    <span class="text-2xl font-semibold text-red-400 mb-3 text-center">
+                      <%= home.houseName %>
+                    </span>
+
+                    <ul class="w-full flex flex-col gap-2 text-slate-300">
+                      <% if (home.price) { %>
+                        <li class="flex items-center bg-slate-700 rounded-xl px-4 py-2 text-base">
+                          <span class="font-semibold w-28">Price:</span> ₹<%= home.price %> / night
+                        </li>
+                        <% } %>
+                          <% if (home.location) { %>
+                            <li class="flex items-center bg-slate-700 rounded-xl px-4 py-2 text-base">
+                              <span class="font-semibold w-28">Location:</span>
+                              <%= home.location %>
+                            </li>
+                            <% } %>
+                              <% if (home.rating) { %>
+                                <li
+                                  class="flex items-center bg-slate-700 rounded-xl px-4 py-2 text-base text-yellow-400">
+                                  <span class="font-semibold w-28">Rating:</span>
+                                  <%= home.rating %>
+                                </li>
+                                <% } %>
+                    </ul>
+
+                    <button
+                      class="mt-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md px-6 py-2 transition">Book
+                      now</button>
+
+                    <form action="/favourites/delete/<%= home._id %>" method="POST"
+                      class="mt-3 w-full flex justify-center">
+                      <button type="submit"
+                        class="bg-red-700 hover:bg-red-800 text-white font-semibold rounded-md px-6 py-2 transition">
+                        Remove from Favourites
+                      </button>
+                    </form>
+              </div>
               <% } %>
-              <% if (home.location) { %>
-                <li class="flex items-center bg-gray-100 rounded-xl px-4 py-2 text-base text-gray-800 shadow-sm">
-                  <span class="font-semibold w-28">Location:</span> <%= home.location %>
-                </li>
-              <% } %>
-              <% if (home.rating) { %>
-                <li class="flex items-center bg-gray-100 rounded-xl px-4 py-2 text-base text-yellow-700 shadow-sm">
-                  <span class="font-semibold w-28">Rating:</span> <%= home.rating %>
-                </li>
-              <% } %>
-            </ul>
-            <button style="background-color: #ff5a5f; color: white; font-weight: bold; border: none; border-radius: 4px; padding: 0.5rem 2rem; cursor: pointer; font-size: 1rem; transition: background-color 0.3s;">Book now</button>
-            <form action="/favourites/delete/<%= home._id %>" method="POST" class="mt-4">
-              <button type="submit" style="background-color: #ff5a5f; color: white; font-weight: bold; border: none; border-radius: 4px; padding: 0.5rem 2rem; cursor: pointer; font-size: 1rem; transition: background-color 0.3s;">Remove from Favourites</button>
-            </form>
-          </div>
-        <% } %>
-      <% }) %>
-    </div>
-  </main>
-</body>
-</html>
+                <% }) %>
+        </div>
+      </main>
+
+  </body>
+
+  </html>

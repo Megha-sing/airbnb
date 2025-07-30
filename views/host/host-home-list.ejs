@@ -1,49 +1,66 @@
 <%- include('../partials/head') %>
-</head>
-<body>
-  <%- include('../partials/nav') %>
+  </head>
 
-  <main class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 py-10" style="width:90vw; max-width:90vw;">
-    <h1 class="text-red-600 text-4xl font-extrabold text-center mb-4 drop-shadow-sm">Hey Host! Here are your homes:</h1>
-    <p class="text-gray-700 text-xl text-center mb-10">Manage your listed homes easily</p>
+  <body class="bg-gray-100">
+    <%- include('../partials/nav') %>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 w-full max-w-6xl px-4">
-      <% registeredHomes.forEach(home => { %>
-        <div class="bg-white rounded-2xl ring-1 ring-gray-200 shadow-md hover:shadow-xl transform hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-in-out min-h-[260px] w-full flex flex-col items-center p-6">
-          
-          <% if (home.photo) { %>
-            <img src="<%= home.photo %>" alt="<%= home.houseName %>" class="w-44 h-32 object-cover rounded-xl mb-4 shadow-sm" onerror="this.style.display='none'" />
-          <% } %>
+      <main class="flex flex-col items-center justify-start min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-red-600 text-center mb-4 drop-shadow-sm">Hey Host! Here are
+          your homes:</h1>
+        <p class="text-lg sm:text-xl text-gray-700 text-center mb-10">Manage your listed homes easily</p>
 
-          <span class="text-2xl font-semibold text-red-700 mb-3 text-center"><%= home.houseName %></span>
-          
-          <ul class="w-full flex flex-col gap-2">
-            <% if (home.price) { %>
-              <li class="flex items-center bg-gray-100 rounded-xl px-4 py-2 text-base text-gray-800 shadow-sm">
-                <span class="font-semibold w-28">Price:</span> ₹<%= home.price %> / night
-              </li>
-            <% } %>
-            <% if (home.location) { %>
-              <li class="flex items-center bg-gray-100 rounded-xl px-4 py-2 text-base text-gray-800 shadow-sm">
-                <span class="font-semibold w-28">Location:</span> <%= home.location %>
-              </li>
-            <% } %>
-            <% if (home.rating) { %>
-              <li class="flex items-center bg-gray-100 rounded-xl px-4 py-2 text-base text-yellow-700 shadow-sm">
-                <span class="font-semibold w-28">Rating:</span> <%= home.rating %>
-              </li>
-            <% } %>
-          </ul>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full max-w-6xl">
+          <% registeredHomes.forEach(home=> { %>
+            <div
+              class="bg-white rounded-2xl ring-1 ring-gray-200 shadow-md hover:shadow-xl transform hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-in-out flex flex-col items-center p-6">
 
-          <a href="/host/edit-home/<%= home._id %>?editing=true" class="mt-4 inline-block bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition">Edit</a>
+              <% if (home.photo) { %>
+                <img src="<%= home.photo %>" alt="<%= home.houseName %>"
+                  class="w-48 h-36 object-cover rounded-xl mb-4 shadow-sm" onerror="this.style.display='none'" />
+                <% } %>
 
-          <form action="/host/delete-home/<%= home._id %>" method="POST" class="mt-2 w-full flex justify-center">
-            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition">Delete</button>
-          </form>
+                  <h2 class="text-xl sm:text-2xl font-semibold text-red-700 mb-2 text-center">
+                    <%= home.houseName %>
+                  </h2>
 
+                  <ul class="w-full space-y-2">
+                    <% if (home.price) { %>
+                      <li class="flex items-center bg-gray-50 rounded-lg px-4 py-2 text-gray-800 shadow-sm">
+                        <span class="font-medium w-28">Price:</span> ₹<%= home.price %> / night
+                      </li>
+                      <% } %>
+                        <% if (home.location) { %>
+                          <li class="flex items-center bg-gray-50 rounded-lg px-4 py-2 text-gray-800 shadow-sm">
+                            <span class="font-medium w-28">Location:</span>
+                            <%= home.location %>
+                          </li>
+                          <% } %>
+                            <% if (home.rating) { %>
+                              <li class="flex items-center bg-gray-50 rounded-lg px-4 py-2 text-yellow-700 shadow-sm">
+                                <span class="font-medium w-28">Rating:</span>
+                                <%= home.rating %>
+                              </li>
+                              <% } %>
+                  </ul>
+
+                  <div class="flex gap-3 mt-4">
+                    <a href="/host/edit-home/<%= home._id %>?editing=true"
+                      class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium px-4 py-2 rounded-md transition">
+                      Edit
+                    </a>
+
+                    <form action="/host/delete-home/<%= home._id %>" method="POST">
+                      <button type="submit"
+                        class="bg-red-500 hover:bg-red-600 text-white font-medium px-4 py-2 rounded-md transition">
+                        Delete
+                      </button>
+                    </form>
+                  </div>
+
+            </div>
+            <% }) %>
         </div>
-      <% }) %>
-    </div>
-  </main>
-</body>
-</html>
+      </main>
+  </body>
+
+  </html>

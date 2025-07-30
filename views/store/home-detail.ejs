@@ -5,55 +5,68 @@
   <%- include('../partials/head') %>
 </head>
 
-<body>
+<body class="bg-slate-900 text-white">
   <%- include('../partials/nav') %>
-    <div class="home-detail-container">
-      <div class="home-detail-photo">
-        <% if (home.photoUrl) { %>
-          <img src="<%= home.photoUrl %>" alt="Home photo" class="home-detail-img"
-            onerror="this.style.display='none'" />
-          <% } else { %>
-            <div class="home-detail-img home-detail-img-placeholder">No Photo Available</div>
-            <% } %>
-      </div>
-      <div class="home-detail-info">
-        <h2 class="home-detail-title">
-          <%= home.houseName %>
-        </h2>
-        <ul class="home-detail-list">
-          <% if (home.price) { %>
-            <li><span class="label">Price:</span> ₹<%= home.price %> / night</li>
-            <% } %>
-              <% if (home.location) { %>
-                <li><span class="label">Location:</span>
-                  <%= home.location %>
-                </li>
-                <% } %>
-                  <% if (home.rating) { %>
-                    <li><span class="label">Rating:</span>
-                      <%= home.rating %>
-                    </li>
-                    <% } %>
-                      <li><span class="label">Type:</span> Entire Apartment</li>
-                      <li><span class="label">Max Guests:</span> 4</li>
-                      <li><span class="label">Amenities:</span> Free WiFi, Kitchen, Air Conditioning, Washer</li>
-                      <li><span class="label">Host:</span> John Doe</li>
-                      <li><span class="label">Description:</span> A beautiful, cozy home perfect for families and
-                        travelers. Enjoy a comfortable stay with all modern amenities and a great location!</li>
-        </ul>
-        <div style="display: flex; gap: 1rem; width: 100%; max-width: 320px; margin-top: 2rem;">
-          <button class="btn-navbar home-detail-action-btn">Book Now</button>
-          <div style="width: 100%;">
-            <%- include('../partials/favourite') %>
+
+    <main
+      class="flex flex-col items-center justify-center px-4 py-12 min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-black">
+      <div
+        class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 bg-slate-800 p-8 rounded-3xl shadow-lg border border-slate-700">
+
+        <!-- Photo Section -->
+        <div class="w-full flex justify-center items-center">
+          <% if (home.photoUrl) { %>
+            <img src="<%= home.photoUrl %>" alt="Home photo" class="rounded-2xl w-full max-h-80 object-cover shadow-md"
+              onerror="this.style.display='none'" />
+            <% } else { %>
+              <div class="bg-slate-700 text-slate-400 flex items-center justify-center h-64 w-full rounded-2xl">No Photo
+                Available</div>
+              <% } %>
+        </div>
+
+        <!-- Info Section -->
+        <div class="flex flex-col justify-center text-slate-200">
+          <h2 class="text-3xl font-bold text-red-400 mb-4">
+            <%= home.houseName %>
+          </h2>
+
+          <ul class="space-y-2 text-slate-300 text-base leading-relaxed">
+            <% if (home.price) { %>
+              <li><span class="font-semibold text-white">Price:</span> ₹<%= home.price %> / night</li>
+              <% } %>
+                <% if (home.location) { %>
+                  <li><span class="font-semibold text-white">Location:</span>
+                    <%= home.location %>
+                  </li>
+                  <% } %>
+                    <% if (home.rating) { %>
+                      <li><span class="font-semibold text-white">Rating:</span>
+                        <%= home.rating %>
+                      </li>
+                      <% } %>
+                        <li><span class="font-semibold text-white">Type:</span> Entire Apartment</li>
+                        <li><span class="font-semibold text-white">Max Guests:</span> 4</li>
+                        <li><span class="font-semibold text-white">Amenities:</span> Free WiFi, Kitchen, Air
+                          Conditioning, Washer</li>
+                        <li><span class="font-semibold text-white">Host:</span> John Doe</li>
+                        <li><span class="font-semibold text-white">Description:</span> A beautiful, cozy home perfect
+                          for families and travelers. Enjoy a comfortable stay with all modern amenities and a great
+                          location!</li>
+          </ul>
+
+          <!-- Actions -->
+          <div class="mt-6 flex gap-4">
+            <button class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition">
+              Book Now
+            </button>
+            <div class="w-full">
+              <%- include('../partials/favourite') %>
+            </div>
           </div>
         </div>
+
       </div>
-    </div>
-    <style>
-      .home-detail-action-btn {
-        width: 100%;
-      }
-    </style>
+    </main>
 </body>
 
 </html>
