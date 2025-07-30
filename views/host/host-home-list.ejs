@@ -1,21 +1,21 @@
 <%- include('../partials/head') %>
 </head>
-<body>
+<body class="bg-slate-900 min-h-screen">
   <%- include('../partials/nav') %>
 
-  <main class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 py-10" style="width:90vw; max-width:90vw;">
-    <h1 class="text-red-600 text-4xl font-extrabold text-center mb-4 drop-shadow-sm">Hey Host! Here are your homes:</h1>
-    <p class="text-gray-700 text-xl text-center mb-10">Manage your listed homes easily</p>
+  <main class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 py-10" style="width:90vw; max-width:90vw;">
+    <h1 class="text-blue-400 text-5xl font-extrabold text-center mb-4 drop-shadow-2xl bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Hey Host! Here are your homes:</h1>
+    <p class="text-slate-300 text-xl text-center mb-10 font-light">Manage your listed homes easily</p>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 w-full max-w-6xl px-4">
       <% registeredHomes.forEach(home => { %>
-        <div class="bg-white rounded-2xl ring-1 ring-gray-200 shadow-md hover:shadow-xl transform hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-in-out min-h-[260px] w-full flex flex-col items-center p-6">
+        <div class="bg-slate-800/40 backdrop-blur-md rounded-2xl ring-1 ring-blue-500/20 shadow-2xl hover:shadow-blue-500/25 hover:shadow-2xl transform hover:-translate-y-2 hover:scale-[1.03] transition-all duration-500 ease-out min-h-[280px] w-full flex flex-col items-center p-6 border border-slate-700/50">
           
           <% if (home.photo) { %>
-            <img src="<%= home.photo %>" alt="<%= home.houseName %>" class="w-44 h-32 object-cover rounded-xl mb-4 shadow-sm" onerror="this.style.display='none'" />
+            <img src="<%= home.photo %>" alt="<%= home.houseName %>" class="w-44 h-32 object-cover rounded-xl mb-4 shadow-lg ring-2 ring-blue-400/30" onerror="this.style.display='none'" />
           <% } %>
 
-          <span class="text-2xl font-semibold text-red-700 mb-3 text-center"><%= home.houseName %></span>
+          <span class="text-2xl font-semibold text-blue-300 mb-3 text-center"><%= home.houseName %></span>
           
           <ul class="w-full flex flex-col gap-2">
             <% if (home.price) { %>
@@ -35,10 +35,10 @@
             <% } %>
           </ul>
 
-          <a href="/host/edit-home/<%= home._id %>?editing=true" class="mt-4 inline-block bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition">Edit</a>
+          <a href="/host/edit-home/<%= home._id %>?editing=true" class="mt-4 inline-block bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-6 py-2 rounded-xl shadow-lg hover:shadow-yellow-500/25 transition duration-300 transform hover:scale-105 backdrop-blur-sm border border-yellow-500/30">Edit</a>
 
           <form action="/host/delete-home/<%= home._id %>" method="POST" class="mt-2 w-full flex justify-center">
-            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition">Delete</button>
+            <button type="submit" class="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-2 rounded-xl shadow-lg hover:shadow-red-500/25 transition duration-300 transform hover:scale-105 backdrop-blur-sm border border-red-500/30">Delete</button>
           </form>
 
         </div>
